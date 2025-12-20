@@ -1,0 +1,7 @@
+FROM ghcr.io/ublue-os/silverblue-main:latest
+RUN set -x; \
+    dnf install -y --setopt=install_weak_deps=False --repo=fedora,updates livesys-scripts \
+    && dnf clean all \
+    && : "SECTION: Setup live session" \
+    && sed -i "s/^livesys_session=.*/livesys_session=gnome/" /etc/sysconfig/livesys \
+    && echo "# Disabled for live sessions" > /etc/systemd/zram-generator.conf

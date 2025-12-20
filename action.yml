@@ -10,6 +10,11 @@ inputs:
     description: "Path to move the resulting ISO to"
     required: true
 
+outputs:
+  iso-path:
+    description: "Path to the resulting ISO file"
+    value: ${{ steps.move-iso.outputs.iso-path }}
+
 runs:
   using: "composite"
   steps:
@@ -20,6 +25,7 @@ runs:
         SQUASHFS_CTR_IMG: ${{ inputs.container-image }}
 
     - name: Move ISO
+      id: move-iso
       run: |
         ISO_FILE=$(find "${{ github.action_path }}"/out -name "*.iso" -type f -print -quit)
         if [ -z "$ISO_FILE" ]; then
@@ -29,4 +35,5 @@ runs:
         mkdir -p "$(dirname ${{ inputs.iso-path }})"
         mv "$ISO_FILE" "${{ inputs.iso-path }}"
         echo "ISO moved to ${{ inputs.iso-path }}"
+        echo "iso-path=$(realpath ${{ inputs.iso-path }})" >> $GITHUB_OUTPUT
       shell: bash

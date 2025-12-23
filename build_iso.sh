@@ -71,6 +71,7 @@ mksquashfs "$SQUASHFS_CTR_IMG_ROOTFS" iso_files/LiveOS/squashfs.img -all-root -n
 truncate -s 500M uefi.img
 mkfs.fat -F32 uefi.img
 mcopy -v -i uefi.img -s /boot/efi/EFI ::
+mcopy -v -i uefi.img -s "iso_files/EFI" ::
 
 # Generate iso
 mkdir -p "$(dirname "${OUTPUT_ISO_FILE}")"

@@ -61,8 +61,8 @@ cp /boot/vmlinuz* iso_files/boot/vmlinuz
 # Copy grub.cfg.
 # We put the cfg file under EFI/fedora in the ISO 9660 filesystem
 # because grubx64.efi is hardcoded to point there.
-mkdir -p iso_files/EFI/fedora
-cp "$GRUB_FILE_PATH" iso_files/EFI/fedora/grub.cfg
+mkdir -p /boot/efi/EFI/fedora
+cp "$GRUB_FILE_PATH" /boot/efi/EFI/fedora/grub.cfg
 
 # Generate squashfs
 mksquashfs "$SQUASHFS_CTR_IMG_ROOTFS" iso_files/LiveOS/squashfs.img -all-root -noappend
@@ -71,7 +71,6 @@ mksquashfs "$SQUASHFS_CTR_IMG_ROOTFS" iso_files/LiveOS/squashfs.img -all-root -n
 truncate -s 500M uefi.img
 mkfs.fat -F32 uefi.img
 mcopy -v -i uefi.img -s /boot/efi/EFI ::
-mcopy -v -i uefi.img -s "iso_files/EFI" ::
 
 # Generate iso
 mkdir -p "$(dirname "${OUTPUT_ISO_FILE}")"

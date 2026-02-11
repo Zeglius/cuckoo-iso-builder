@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 PS4='[$LINENO]+ '
-set -x
+set -xeo pipefail
 
 _SCRIPTDIR=$(dirname "$0")
 

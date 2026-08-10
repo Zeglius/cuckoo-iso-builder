@@ -1,3 +1,5 @@
+
+
 # Cuckoo ISO Builder
 
 This repository contains a script and a GitHub Action to build a bootable live ISO from any container image. The resulting ISO uses a SquashFS filesystem for the root partition, created directly from the container image layers.
@@ -36,7 +38,7 @@ jobs:
 **Action Inputs:**
 
 - `container-image` (required): The full name of the container image to use as the base for the ISO's root filesystem (e.g., `ubuntu:latest`).
-- `iso-path` (required): The directory path where the final ISO file will be moved after being built.
+- `iso-path` (required): The destination file path where the final ISO file will be moved after being built.
 
 ### As a Standalone Script
 
